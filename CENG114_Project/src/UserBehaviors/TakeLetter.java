@@ -6,31 +6,25 @@ import java.util.Random;
 
 public class TakeLetter implements TakeLetterBehavior {
 
-    private Random random = new Random();
+   
 
     @Override
-    public void takeLetter(char[] current, String answer) {
+    public void takeLetter(char[] currentArr, String answer) {
 
-        List<Integer> hiddenIndexes = new ArrayList<>();
-
-        for (int i = 0; i < current.length; i++) {
-            if (current[i] == '-') {
-                hiddenIndexes.add(i);
+         
+        while (true) {
+            int random = (int) (Math.random() * currentArr.length);
+            if (currentArr[random] == '-') {
+                currentArr[random] = answer.charAt(random);
+                count++;
+                System.out.println(count);
+                break;
             }
         }
-
-        if (hiddenIndexes.isEmpty()) return;
-
-        int randomIndex = hiddenIndexes.get(
-                random.nextInt(hiddenIndexes.size())
-        );
-
-        char letter = answer.charAt(randomIndex);
-
-        for (int i = 0; i < answer.length(); i++) {
-            if (answer.charAt(i) == letter) {
-                current[i] = letter;
-            }
-        }
+        
     }
+    
+   
+    
+    
 }
